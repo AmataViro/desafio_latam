@@ -1,0 +1,13 @@
+.card{
+    border-radius: 5px;
+    border: solid rgb(131, 4, 148) 1px;
+}
+.card__title{
+    background-color: rgb(209, 221, 243);
+}
+.card__footer{
+    background-color: rgb(209, 221, 243);
+}
+.card__children{
+    background-color: rgb(223, 217, 255);
+}
