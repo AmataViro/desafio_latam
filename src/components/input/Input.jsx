@@ -1,8 +1,7 @@
 import React from 'react';
 
-const Input = (type, name) => (
+const Input = (name) => (
     <input 
-        type={type}
         name={name}
         type="text" placeholder="search hero"
     />

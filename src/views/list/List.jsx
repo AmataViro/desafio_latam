@@ -7,18 +7,31 @@ import Th from './../../components/table/Th';
 import Tr from './../../components/table/Tr';
 import Thead from './../../components/table/Thead';
 import Input from './../../components/input/Input';
+import Button from './../../components/button/Button';
 
 
 class List extends Component{
     constructor(props){
         super(props);
         this.state = {
+            typeRing:'btn btn-outline-primary',
+            typeKill:'btn btn-outline-danger',
+            stateRing: false,
+            stateKill: false,
             datosTable : getAll(),
         };
     }
 
+    handleKill = (e) => {
+        
+            console.log(e)
+        
+        
+        /*const { name, value } = e.target;
+        this.setState({ [name]: value });   */
+    }
     render() {
-        const {datosTable} = this.state;
+        const {typeRing,typeKill,stateRing, stateKill, datosTable} = this.state;
         return (
             <div className="index">
                 <h2>Fellowship of the Ring</h2>
@@ -36,7 +49,7 @@ class List extends Component{
                             </Tr>
                             </Thead>
                         <Tbody>
-                            {datosTable.map((e) => (
+                            {datosTable.map((e,i) => (
                                 <Tr>
                                     <Td>{e.name}</Td>
                                     <Td>{e.race}</Td>
@@ -44,8 +57,8 @@ class List extends Component{
                                     <Td>{e.weapon}</Td>
                                     <Td>
                                         <div className="controls">
-                                            <div>☠ {'Kill'}</div>
-                                            <div>💍 {'Use Ring'}</div>
+                                            <div><Button title={'Use Ring'} type={typeRing} event={()=> (this.handleKill(e))}  state={stateRing}></Button></div>
+                                            <div><Button title={'Kill'} type={typeKill} event={this.handleKill} state={stateKill}></Button></div>
                                         </div>
                                     </Td>
                                 </Tr>
