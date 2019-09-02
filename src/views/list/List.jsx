@@ -21,14 +21,26 @@ class List extends Component{
             stateRing: false,
             stateKill: false,
             datosTable : getAll(),
+            useRing : true
         };
     }
 
+    handleUseRing = (e) => {
+        const { datosTable } = this.state;
+        var datosNuevos = datosTable.filter(function(datos){
+            return datos.name !== e.name;
+        })
+        this.setState({ datosTable: datosNuevos, useRing: false });
+    }
+    
     handleKill = (e) => {
         const { datosTable } = this.state;
-        console.log(e);
-        console.log(datosTable);
-        // aqui recorro datosTable y excluyo el ultimo registro guardandolo aparte para finalmente hacer push
+        var killed = { name: e.name, race: e.race , age: e.age, weapon: e.weapon, live: false, usering: e.usering };
+        var datosNuevos = datosTable.filter(function(datos){
+            return datos.name !== e.name;
+        })
+        datosNuevos.push(killed);
+        this.setState({ datosTable: datosNuevos});   
     }
     render() {
         const {typeRing,typeKill,stateRing, stateKill, datosTable} = this.state;
@@ -50,15 +62,18 @@ class List extends Component{
                             </Thead>
                         <Tbody>
                             {datosTable.map((e,i) => (
-                                <Tr key={i} class={e.live === true ? 'hero-kill':''}>
+                                <Tr key={i} class={e.live === true ? '':'hero-kill'}>
                                     <Td>{e.name}</Td>
                                     <Td>{e.race}</Td>
                                     <Td>{e.age}</Td>
                                     <Td>{e.weapon}</Td>
                                     <Td>
                                         <div className="controls">
-                                            <div><Button title={'Use Ring'} type={typeRing} event={()=> (this.handleKill(e))}  state={stateRing}></Button></div>
+                                        { e.usering === this.state.useRing ?
+                                            <div><Button title={'Use Ring'} type={typeRing} event={()=> (this.handleUseRing(e))}  state={stateRing}></Button></div>
+                                        : ''}    
                                             <div><Button title={'Kill'} type={typeKill} event={()=> (this.handleKill(e))} state={stateKill}></Button></div>
+                                         
                                         </div>
                                     </Td>
                                 </Tr>
