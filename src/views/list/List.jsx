@@ -67,6 +67,7 @@ class List extends Component{
                                     <Td>{e.race}</Td>
                                     <Td>{e.age}</Td>
                                     <Td>{e.weapon}</Td>
+                                    
                                     <Td>
                                         <div className="controls">
                                         { e.usering === this.state.useRing ?
